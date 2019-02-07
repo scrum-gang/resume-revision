@@ -1,24 +1,22 @@
 # Resume Revision
-* Ruby version 2.3.3
+* Ruby version 2.6.1
+
 
 ## Description
 
-* responsible for uploading resumes and attaching them to users
-
-* have title and revision per resume that could be changed.
-
-* responsible for returning a list of resumes per user and attaching new resumes for a user
+* Responsible for uploading resumes and attaching them to users.
+* Have title and revision per resume that could be changed.
+* Responsible for returning a list of resumes per user and attaching new resumes for a user.
 
 
 ## How to run?
 
-* do 'bundle install' to fetch the gems
-
-* for locally testing the database setup postgressql and run 'rails db:setup'
-
-* do 'rails server' to run the rails server
+* Run `bundle install` to fetch and install the gems.
+* For locally testing the database, setup postgresql and run `bundle exec rails db:setup`.
+* Run `bundle exec rails server` to run the Rails server.
 
 
 ## Deployment on Heroku
 
-* git push heroku
+* Releases on master branches are automatically deployed to Heroku.
+* Pull requests are tested on Travis before being deployed to a QA Heroku instance.

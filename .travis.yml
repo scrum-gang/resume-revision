@@ -1,0 +1,18 @@
+dist: xenial
+language: ruby
+services: postgresql
+cache: bundler
+before_script:
+  - gem update --system
+  - gem install bundler
+  - bundle exec rake db:create
+  - bundle exec rake db:migrate
+# script:
+#   - bundle exec rspec
+deploy:
+  provider: heroku
+  app: resume-revision
+  api_key:
+    secure: ESOVpfRIMFXVdPFb1Eh/4kbnDJK79dHz347syT/NMdO60gsypzVGxR4itvrp42VFKdG4UaanKzfGuYGDPjZih9+XuaCakAf6hs5tLMEkeRHTSqMNH2pVZ1l02SUKfd0OR7/aH8Cv+qKelw2pavnOSqgt//Z9pAyc+RZ8HeBM4pWsiE3rNrfQ4npgtUlu3+Mel/Z+UI4yFnPVdgxsHoYriydnWpR3YrntN2DMeyqjngIVeFheH8Mw9tjHjWm0e3Tf/aftFNnIsWIJ4YhImBmeOZmWeb5o5CAjxoHM0YyMe1qoVNWIgWZVwM+E10dNzpqQwY8ok97qxzGFaoTxNnPydl+997g+BgTBJNHw6ma3rRGR2nB0wMYwn5I+0/Xa2BQSwQOBzT7GUBLZn3xW5oWbpkREwxqAeZMQ8fU1wN65WVRoadyLFYUQ7+i88ESKZoFMvm0Bh9HE3RLO7KWfsDMh7dumlH1kWVLgLdD+UJglO4CikOGW0XvyFQIZSfy3fCKfTXQIQj70HdpbTY1p8aAeU9YfchlhgDvah84ERgkhQQo4tbPTpD0uymPRpH6B8HmRSL8L4R1a0XJO6PCudmuFhEWtSd4tXlE5i0iK4/lBuzBAQjqYieWKmZHgzJwZwuL4qz3AXkin7z2QknmnDKh6xLMej2wF10z4Z5KJnNc4lIY=
+  on:
+    repo: scrum-gang/resume-revision
