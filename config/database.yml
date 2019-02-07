@@ -1,7 +1,7 @@
 development: &default
   host: localhost
   adapter: postgresql
-  database: demo_test_development
+  database: resume_revision_development
   encoding: unicode
   pool: 5
   username: postgres
@@ -10,16 +10,13 @@ development: &default
   timeout: 5000
 
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: demo_test_test
+  database: resume_revision_test
 
 
 production:
   <<: *default
-  database: myapp_production
+  database: resume_revision_production
   username: myapp
   password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>

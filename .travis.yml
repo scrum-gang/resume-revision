@@ -1,11 +1,14 @@
+dist: xenial
 language: ruby
-cache:
-  - bundler
+services: postgresql
+cache: bundler
 before_script:
+  - gem update --system
+  - gem install bundler
   - bundle exec rake db:create
   - bundle exec rake db:migrate
-script:
-  - bundle exec rspec
+# script:
+#   - bundle exec rspec
 deploy:
   provider: heroku
   app: resume-revision
