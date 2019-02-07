@@ -5,14 +5,12 @@ cache: bundler
 before_script:
   - gem update --system
   - gem install bundler
-  - bundle exec rake db:create
-  - bundle exec rake db:migrate
-# script:
-#   - bundle exec rspec
+  - bundle exec rails db:create
+  - bundle exec rails db:migrate
 deploy:
   provider: heroku
   app: resume-revision
   api_key:
-    secure: ESOVpfRIMFXVdPFb1Eh/4kbnDJK79dHz347syT/NMdO60gsypzVGxR4itvrp42VFKdG4UaanKzfGuYGDPjZih9+XuaCakAf6hs5tLMEkeRHTSqMNH2pVZ1l02SUKfd0OR7/aH8Cv+qKelw2pavnOSqgt//Z9pAyc+RZ8HeBM4pWsiE3rNrfQ4npgtUlu3+Mel/Z+UI4yFnPVdgxsHoYriydnWpR3YrntN2DMeyqjngIVeFheH8Mw9tjHjWm0e3Tf/aftFNnIsWIJ4YhImBmeOZmWeb5o5CAjxoHM0YyMe1qoVNWIgWZVwM+E10dNzpqQwY8ok97qxzGFaoTxNnPydl+997g+BgTBJNHw6ma3rRGR2nB0wMYwn5I+0/Xa2BQSwQOBzT7GUBLZn3xW5oWbpkREwxqAeZMQ8fU1wN65WVRoadyLFYUQ7+i88ESKZoFMvm0Bh9HE3RLO7KWfsDMh7dumlH1kWVLgLdD+UJglO4CikOGW0XvyFQIZSfy3fCKfTXQIQj70HdpbTY1p8aAeU9YfchlhgDvah84ERgkhQQo4tbPTpD0uymPRpH6B8HmRSL8L4R1a0XJO6PCudmuFhEWtSd4tXlE5i0iK4/lBuzBAQjqYieWKmZHgzJwZwuL4qz3AXkin7z2QknmnDKh6xLMej2wF10z4Z5KJnNc4lIY=
+    secure: Kxgv/VEIgK540BePmJR74Q3NEW628C41PvriWTlm9wlHD2D8b2wKwDZ6HuS7e1hCZ9V6jmBzJOmZO/kdXSc+zh1+P8CjuD4XjdfO4D7o63+UBdCvqjD502YzkQxrL2ZjAtjvCtdCiFP6KRgJjPzvUdgBjfVaEWGoX+kkxygzOAWRJ+cvITa2I9D3aFqMZEzYK/i83e610PUY5GIEu16ahUUPG6obdbWDpCzxfjmStXEgcT8s+Ga5NjA6Y5fjbPQNr1D0uOTP5BddH3FywdVv2O/COsdc77vMHBVQk/LQz+Izg5+Znna4XEvREkAMbRPY+v0zKOgVez9hI6vhS/PGgea9X/snVrtIetuNZHMG8aGt2Ia3Uke2VXUk5UbiCl/cMK2FV0bGdzVuuQXxaXD1iu+siwOjUCS1qjSEUk79gJ0sUeSCMwUPWtywYUzxGBhzFBrI8Wm9QgVAef979CvBDLbH/6sZ9Rv2EDQxCVRCaljau/fv1RVbUd+k996S6tfRbUg1MKsDyEI/swBIroKAiZOEEbZMnyYK3AckIis2rAUO0BVEAQx9VCHz7oNtOFvJ0ndhBjdgilf1Kd8UJkyfe9HeIgVH9UnEpan/+lXxBnFyuJ99WbcgeUMlZQdbQfP+cm38ludyQ0XyvOkCASHg+fXNQuuRkqPPEFH0z78MKJc=
   on:
     repo: scrum-gang/resume-revision
