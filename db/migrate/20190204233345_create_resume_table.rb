@@ -1,4 +1,4 @@
-class Resume < ActiveRecord::Migration[5.2]
+class CreateResumeTable < ActiveRecord::Migration[5.2]
   def change
     create_table :resumes do |t|
       t.string :title
