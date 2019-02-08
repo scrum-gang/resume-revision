@@ -10,6 +10,7 @@ class Resume < ApplicationRecord
   after_create :parse_doc
 
   def parse_doc
+    return if self.resume_data.nil?
     contents = self.resume_data.sub /data:((image|application)\/.{3,}),/, ''
     decoded_data = Base64.decode64(contents)
     filename = "#{self.title}_#{self.revision}_resume.pdf"
