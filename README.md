@@ -34,3 +34,8 @@
 * list all resumes for a specific user
 #### get '/resumes/:user_id/:title/:revision'
 * list a specific resume given title and revision
+#### delete '/resumes/:user_id/:title/:revision'
+* delete a specific resume
+#### patch '/resumes/:id/:title/:revision'
+* given a resume id
+* update with the new title and the new revision passed

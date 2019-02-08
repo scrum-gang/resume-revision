@@ -4,6 +4,7 @@ class Resume < ApplicationRecord
   validates :title, presence: true
   validates :revision, presence: true
   validates :user_id, presence: true
+  validates [:title, :user_id, :revision], uniqueness: true
 
   attr_accessor :resume_data
 

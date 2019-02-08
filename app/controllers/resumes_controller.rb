@@ -19,6 +19,7 @@ class ResumesController < ApplicationController
     else
       msg = ["save the resume into the database?=#{!!save}"]
       msg << "attach the document to the resume entity?=#{!!resume.data.attached?}"
+      msg << resume.errors.messages.to_s unless resume.errors.messages.empty?
       Rails.logger.error(msg)
       render json: { error: msg }, status: :bad_request
     end
@@ -46,6 +47,11 @@ class ResumesController < ApplicationController
   # GET REQUEST
   # ASSUMPTION: the user_id, title and revision should be unique per resume.
   # that is the combination is a primary_key
+  # params:
+  #   - user_id: is the user id
+  #   - title: is the new title for the resume
+  #   - revision: is the new revision for the resume
+
   #
   def fetch_specific_resume
     user_id = params[:user_id]
@@ -59,6 +65,67 @@ class ResumesController < ApplicationController
       render json: resume, status: :ok
     end
   end
+
+  #
+  # delete a single resume given
+  #
+  # DELETE REQUEST
+  # ASSUMPTION: the user_id, title and revision should be unique per resume.
+  # that is the combination is a primary_key
+  # params:
+  #   - user_id: is the user id
+  #   - title: is the new title for the resume
+  #   - revision: is the new revision for the resume
+  #
+  def delete_specific_resume
+    user_id = params[:user_id]
+    title = params[:title]
+    revision = params[:revision]
+
+    resume = Resume.find_by(user_id: user_id, title: title, revision: revision)
+
+    if resume.nil?
+      render json: {}, status: :not_found
+    else
+      resume.data.purge
+      resume.destroy
+      render json: {}, status: :deleted
+    end
+  end
+
+  #
+  # edit a single resume given
+  #
+  # Patch REQUEST
+  # params:
+  #   - id: is the resume id NOT THE USER ID
+  #   - title: is the new title for the resume
+  #   - revision: is the new revision for the resume
+  #
+  def update_specific_resume
+    id = params[:id]
+    title = params[:title]
+    revision = params[:revision]
+
+    resume = Resume.find_by_id(id)
+    if resume.nil?
+      render json: {}, status: :not_found
+    else
+      resume.title = title;
+      resume.revision = revision;
+      save = resume.save
+      msg = ["save the resume into the database?=#{!!save}"]
+      msg << resume.errors.messages.to_s if resume.errors.messages.empty?
+      Rails.logger.error(msg)
+
+      if not resume.errors.messages.empty?
+        render json: { errors: msg }, status: :bad_request
+      else
+        render json: resume, status: :ok
+      end
+    end
+  end
+
 
   private
 
