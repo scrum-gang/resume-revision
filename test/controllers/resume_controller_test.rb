@@ -4,6 +4,7 @@ require 'test_helper'
 # Look at fixtures
 #
 class ResumesControllerTest < ActionDispatch::IntegrationTest
+  #resumes tests
   test "should get not found for a non defined user" do
     get user_resumes_url(user_id: 99)
     assert_response :not_found
@@ -26,6 +27,8 @@ class ResumesControllerTest < ActionDispatch::IntegrationTest
     assert_equal json, [resumes(:resume2_1), resumes(:resume2_2)].as_json
   end
 
+
+  #specific resumes tests
   test "should get not found for specific resume" do
     get fetch_specific_resume_url(user_id: 2, title: 'dummy', revision: '3')
     assert_response :not_found
@@ -38,12 +41,13 @@ class ResumesControllerTest < ActionDispatch::IntegrationTest
     assert_equal json, resumes(:resume2_1).as_json
   end
 
+  #post resumes test
   test "should fail when missing a parameter of a resume" do
     params = {
-        title: 'dummy',
-        user_name: 'dummy',
-        user_id: '44',
-        resume_data: sample_resume
+      title: 'dummy',
+      user_name: 'dummy',
+      user_id: '44',
+      resume_data: sample_resume
     }
     post resumes_url, params: params
     assert_response :bad_request
@@ -51,13 +55,27 @@ class ResumesControllerTest < ActionDispatch::IntegrationTest
 
   test "should fail when missing the resume data" do
     params = {
-        title: 'dummy',
-        user_name: 'dummy',
-        user_id: '44',
-        revision: '33'
+      title: 'dummy',
+      user_name: 'dummy',
+      user_id: '44',
+      revision: '33'
     }
     post resumes_url, params: params
     assert_response :bad_request
+  end
+
+  test "should succeed creating a resume when all the data is correct" do
+    params = {
+      title: 'dummy',
+      user_name: 'dummy',
+      user_id: 44,
+      revision: '33',
+      resume_data: sample_resume
+    }
+    post resumes_url, params: params
+    json = JSON.parse(response.body).except("id").except("download_resume_url")
+    assert_response :created
+    assert_equal json, params.except(:resume_data).transform_keys { |key| key.to_s}
   end
 end
 

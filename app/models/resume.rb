@@ -20,5 +20,6 @@ class Resume < ApplicationRecord
 
     self.data.attach(io: File.open("#{Rails.root}/tmp/#{filename}"), filename: filename)
     FileUtils.rm("#{Rails.root}/tmp/#{filename}")
+    self.download_resume_url = Rails.application.routes.url_helpers.rails_blob_path(self.data, only_path: true)
   end
 end

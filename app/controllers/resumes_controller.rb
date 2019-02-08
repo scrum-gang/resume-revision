@@ -20,7 +20,7 @@ class ResumesController < ApplicationController
       msg = ["save the resume into the database?=#{!!save}"]
       msg << "attach the document to the resume entity?=#{!!resume.data.attached?}"
       Rails.logger.error(msg)
-      render json: {error: msg}, status: :bad_request
+      render json: { error: msg }, status: :bad_request
     end
   end
 
@@ -31,9 +31,8 @@ class ResumesController < ApplicationController
   # param:
   # user_id the user_id we are using to search
   def user_resumes
-    user_id =  params[:user_id]
+    user_id = params[:user_id]
     resumes = Resume.where(user_id: user_id)
-
     if resumes.empty?
       render json: {}, status: :not_found
     else
@@ -49,12 +48,11 @@ class ResumesController < ApplicationController
   # that is the combination is a primary_key
   #
   def fetch_specific_resume
-    user_id =  params[:user_id]
-    title =  params[:title]
-    revision =  params[:revision]
+    user_id = params[:user_id]
+    title = params[:title]
+    revision = params[:revision]
 
     resume = Resume.find_by(user_id: user_id, title: title, revision: revision)
-
     if resume.nil?
       render json: {}, status: :not_found
     else
