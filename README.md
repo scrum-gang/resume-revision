@@ -20,3 +20,17 @@
 
 * Releases on master branches are automatically deployed to Heroku.
 * Pull requests are tested on Travis before being deployed to a QA Heroku instance.
+
+## API Documentation
+#### post '/resumes'
+* create a new resume
+* params: 
+    * user_id: foreign key
+    * user_name 
+    * revision
+    * title
+    * resume_data: base64 of the pdf
+#### get '/resumes/:user_id'
+* list all resumes for a specific user
+#### get '/resumes/:user_id/:title/:revision'
+* list a specific resume given title and revision
