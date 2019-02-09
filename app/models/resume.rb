@@ -10,6 +10,7 @@ class Resume < ApplicationRecord
   after_create :parse_doc
 
   def parse_doc
+    return if self.resume_data.nil?
     contents = self.resume_data.sub /data:((image|application)\/.{3,}),/, ''
     decoded_data = Base64.decode64(contents)
     filename = "#{self.title}_#{self.revision}_resume.pdf"
@@ -19,5 +20,6 @@ class Resume < ApplicationRecord
 
     self.data.attach(io: File.open("#{Rails.root}/tmp/#{filename}"), filename: filename)
     FileUtils.rm("#{Rails.root}/tmp/#{filename}")
+    self.download_resume_url = Rails.application.routes.url_helpers.rails_blob_path(self.data, only_path: true)
   end
 end

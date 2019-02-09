@@ -7,4 +7,7 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def sample_resume
+    @sample_resume ||= File.read("test/assets/sample_resume.txt")
+  end
 end

@@ -9,6 +9,9 @@ gem 'pg'
 gem 'pry'
 gem 'json'
 
+# rails controller testing for integration tests
+gem 'rails-controller-testing'
+
 # Stylesheet gems
 gem 'sass-rails', '~> 5.0'
 
