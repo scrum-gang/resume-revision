@@ -66,7 +66,7 @@ class ResumesControllerTest < ActionDispatch::IntegrationTest
     post resumes_url, params: params
     json = JSON.parse(response.body).except("id").except("download_resume_url")
     assert_response :created
-    assert_equal json, params.except(:resume_data)
+    assert_equal json, params.except(:resume_data).transform_keys { |key| key.to_s}
     assert_equal Resume.all.count , count+1
 
   end
