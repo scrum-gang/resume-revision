@@ -4,7 +4,7 @@ class Resume < ApplicationRecord
   validates :title, presence: true
   validates :revision, presence: true
   validates :user_id, presence: true
-  validates [:title, :user_id, :revision], uniqueness: true
+  validates :user_id, uniqueness: { scope: [:title, :revision] }
 
   attr_accessor :resume_data
 
@@ -18,9 +18,9 @@ class Resume < ApplicationRecord
     File.open("#{Rails.root}/tmp/#{filename}", 'wb') do |f|
       f.write(decoded_data)
     end
-
     self.data.attach(io: File.open("#{Rails.root}/tmp/#{filename}"), filename: filename)
     FileUtils.rm("#{Rails.root}/tmp/#{filename}")
-    self.download_resume_url = Rails.application.routes.url_helpers.rails_blob_path(self.data, only_path: true)
+    self.download_resume_url = Rails.application.routes.url_helpers.rails_blob_url(self.data)
+    self.save
   end
 end

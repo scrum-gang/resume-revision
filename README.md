@@ -36,6 +36,7 @@
 * list a specific resume given title and revision
 #### delete '/resumes/:user_id/:title/:revision'
 * delete a specific resume
-#### patch '/resumes/:id/:title/:revision'
+#### patch '/resumes/:id'
 * given a resume id
+* params: :title :revision
 * update with the new title and the new revision passed

@@ -81,15 +81,13 @@ class ResumesController < ApplicationController
     user_id = params[:user_id]
     title = params[:title]
     revision = params[:revision]
-
     resume = Resume.find_by(user_id: user_id, title: title, revision: revision)
 
     if resume.nil?
       render json: {}, status: :not_found
     else
-      resume.data.purge
       resume.destroy
-      render json: {}, status: :deleted
+      render json: {}, status: :ok
     end
   end
 

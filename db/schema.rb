@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_04_233345) do
+ActiveRecord::Schema.define(version: 2019_02_09_210059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,7 +40,8 @@ ActiveRecord::Schema.define(version: 2019_02_04_233345) do
     t.string "title"
     t.string "revision"
     t.string "user_name"
-    t.bigint "user_id"
+    t.string "user_id"
+    t.string "download_resume_url"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
