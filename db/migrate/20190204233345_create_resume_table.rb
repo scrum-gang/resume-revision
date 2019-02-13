@@ -5,7 +5,6 @@ class CreateResumeTable < ActiveRecord::Migration[5.2]
       t.string :revision
       t.string :user_name
       t.bigint :user_id
-      t.string :download_resume_url
     end
   end
 end
