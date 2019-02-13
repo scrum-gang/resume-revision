@@ -32,3 +32,9 @@ local:
 #   service: Mirror
 #   primary: local
 #   mirrors: [ amazon, google, microsoft ]
+
+azure:
+  service: AzureStorage
+  storage_account_name: "resumerevision"
+  storage_access_key: "KuCkvsAjFMi1DKLTZuY4qdQLT1QpIPVO6KRRw3lR4YJz4twIB4vqg7FDfXapdMJLqO4JPvREREVC+v9JVCKwkg=="
+  container: "resume-revision"

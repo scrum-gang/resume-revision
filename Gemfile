@@ -12,6 +12,9 @@ gem 'json'
 # rails controller testing for integration tests
 gem 'rails-controller-testing'
 
+# add azure blob storage
+gem "azure-storage"
+
 # Stylesheet gems
 gem 'sass-rails', '~> 5.0'
 
