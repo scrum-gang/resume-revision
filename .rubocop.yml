@@ -1,0 +1,86 @@
+AllCops:
+  TargetRubyVersion: 2.6
+  Exclude:
+    - 'Gemfile'
+    - 'bin/**/*'
+    - 'db/schema.rb'
+    - 'vendor/**/*'
+    - 'test/**/*'
+    - 'tmp/**/*'
+
+Rails:
+  Enabled: true
+
+# ====== #
+# LAYOUT #
+# ====== #
+
+Layout/AlignParameters:
+  Enabled: true
+  EnforcedStyle: with_fixed_indentation
+
+Layout/IndentationConsistency:
+  EnforcedStyle: normal
+
+Layout/SpaceInsideArrayLiteralBrackets:
+  Enabled: false
+
+# ======= #
+# METRICS #
+# ======= #
+
+Metrics/LineLength:
+  Max: 200
+  Exclude:
+    - 'test/**/*'
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+# ====== #
+# NAMING #
+# ====== #
+
+Naming/HeredocDelimiterNaming:
+  Enabled: false
+
+# ===== #
+# RAILS #
+# ===== #
+
+Rails/OutputSafety:
+  Enabled: false
+
+Rails/CreateTableWithTimestamps:
+  Enabled: false
+
+Rails/DynamicFindBy:
+  Enabled: false
+
+# ===== #
+# STYLE #
+# ===== #
+
+Style/AccessModifierDeclarations:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/DoubleNegation:
+  Enabled: false
+
+Style/EmptyMethod:
+  Enabled: false
+
+Style/RedundantSelf:
+  Enabled: false
