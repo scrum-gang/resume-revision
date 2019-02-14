@@ -1,10 +1,8 @@
 require 'test_helper'
 
-#
 # Look at fixtures
-#
 class ResumesControllerTest < ActionDispatch::IntegrationTest
-  #resumes tests
+  # Resumes tests
   test "should get not found for a non defined user" do
     get user_resumes_url(user_id: '99')
     assert_response :not_found
@@ -27,8 +25,7 @@ class ResumesControllerTest < ActionDispatch::IntegrationTest
     assert_equal json, [resumes(:resume2_1), resumes(:resume2_2)].as_json
   end
 
-
-  #specific resumes tests
+  # Specific resumes tests
   test "should get not found for specific resume" do
     get fetch_specific_resume_url(user_id: '2', title: 'dummy', revision: '3')
     assert_response :not_found
@@ -41,7 +38,7 @@ class ResumesControllerTest < ActionDispatch::IntegrationTest
     assert_equal json, resumes(:resume2_1).as_json
   end
 
-  #post resumes test
+  # Post resumes test
   test "should fail when missing a parameter of a resume" do
     params = {
       title: 'dummy',
@@ -71,7 +68,7 @@ class ResumesControllerTest < ActionDispatch::IntegrationTest
 
   end
 
-  # delete resume
+  # Delete resume
   test "should delete a resume successfully" do
     params = {
         title: 'title',
@@ -98,7 +95,7 @@ class ResumesControllerTest < ActionDispatch::IntegrationTest
     assert_equal Resume.all.count , count
   end
 
-  # update a resume
+  # Update a resume
   test "should update a resume successfully" do
     params = {
         title: 'new_title',
@@ -127,6 +124,3 @@ class ResumesControllerTest < ActionDispatch::IntegrationTest
     assert_equal Resume.all.count , count
   end
 end
-
-
-

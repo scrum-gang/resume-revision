@@ -1,22 +1,28 @@
-development: &default
-  host: localhost
+default: &default
   adapter: postgresql
-  database: resume_revision_development
+  template: template0
   encoding: unicode
+  timeout: 5000
   pool: 5
+
+
+local: &local
   username: postgres
   password: postgres
-  template: template0
-  timeout: 5000
+  host: localhost
+
+
+development:
+  <<: *default
+  <<: *local
+  database: resume_revision_development
 
 
 test:
   <<: *default
+  <<: *local
   database: resume_revision_test
 
 
 production:
   <<: *default
-  database: resume_revision_production
-  username: myapp
-  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
