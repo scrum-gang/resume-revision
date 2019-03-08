@@ -22,6 +22,14 @@
 * Pull requests are tested on Travis before being deployed to a QA Heroku instance.
 
 ## API Documentation
+#### READ THIS FIRST
+* all requests are expected to include the following headers
+```json
+"Content-type": "application/json"
+"Authorization": "Bearer [token]"
+```
+* also all requests would not allow a user to access other users data.
+
 #### post '/resumes'
 * create a new resume
 * params: 
