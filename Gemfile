@@ -8,6 +8,7 @@ gem 'puma', '~> 3.11'
 gem 'pg'
 gem 'pry'
 gem 'json'
+gem 'httparty'
 
 # rails controller testing for integration tests
 gem 'rails-controller-testing'

@@ -1,5 +1,11 @@
 class ResumesController < ApplicationController
+
+  before_action :authenticate, except: [ :index ]
+  before_action :authorize, except: [:index, :update_specific_resume]
+  before_action :authorize_based_on_resume_id, only: [:update_specific_resume]
+   
   def index
+    render plain: "Everyone can see me!"
   end
 
   # Creates a new resume
@@ -119,5 +125,52 @@ class ResumesController < ApplicationController
 
   def resume_params
     params.permit(:title, :revision, :user_name, :user_id, :resume_data)
+  end
+
+  def bearer_token
+    pattern = /^Bearer /
+    header  = request.headers['Authorization']
+    header.gsub(pattern, '') if header && header.match(pattern)
+  end
+
+  def authenticate
+    response = AuthenticationTokenVerifier.verify_request(bearer_token)
+    Rails.logger.info("verification came back with response ")
+    Rails.logger.info(response)
+    
+    if response.code != 200
+      msg = ["caused by JsonWebTokenError: invalid signature"] 
+      render json: { errors: msg }, status: :unauthorized
+    elsif not response["verified"]
+      msg = ["please verify your email address"] 
+      render json: { errors: msg }, status: :unauthorized
+    end
+
+    # setup session variables
+    session[:user_id] = response['_id']
+    session[:email] = response['email']
+    session[:type] = response['type']
+    session[:verified] = response['verified']
+  end
+
+  # make sure the user can do stuff only on his account
+  def authorize
+    unless session[:user_id] == params[:user_id]
+      msg = ["access to other users data is not allowed"] 
+      render json: { errors: msg }, status: :unauthorized
+    end
+  end
+
+  def authorize_based_on_resume_id
+    id = params[:id]
+    resume = Resume.find_by_id(id)
+    if resume.nil?
+      render json: {}, status: :not_found
+    end
+
+    unless session[:user_id] == resume.user_id
+      msg = ["access to other users data is not allowed"] 
+      render json: { errors: msg }, status: :unauthorized
+    end
   end
 end
