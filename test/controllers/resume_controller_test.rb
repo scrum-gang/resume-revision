@@ -1,6 +1,6 @@
 require 'test_helper'
 
-# Look at fixtures
+# Look at fixtures for a sample resume
 class ResumesControllerTest < ActionDispatch::IntegrationTest
   # Resumes tests
   test "should get not found for a non defined user" do
