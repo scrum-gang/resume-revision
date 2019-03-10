@@ -9,6 +9,7 @@ gem 'pg'
 gem 'pry'
 gem 'json'
 gem 'httparty'
+gem 'webmock', '~> 3.0', '>= 3.0.1'
 
 # rails controller testing for integration tests
 gem 'rails-controller-testing'
