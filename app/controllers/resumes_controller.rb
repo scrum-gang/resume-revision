@@ -1,8 +1,8 @@
 class ResumesController < ApplicationController
 
-  before_action :authenticate, except: [ :index ],  unless: -> { Rails.env.test? }
-  before_action :authorize, except: [:index, :update_specific_resume], unless: -> { Rails.env.test? }
-  before_action :authorize_based_on_resume_id, only: [:update_specific_resume], unless: -> { Rails.env.test? }
+  before_action :authenticate, except: [ :index ]
+  before_action :authorize, except: [:index, :update_specific_resume]
+  before_action :authorize_based_on_resume_id, only: [:update_specific_resume]
    
   def index
     render plain: "Everyone can see me!"
@@ -141,16 +141,13 @@ class ResumesController < ApplicationController
     if response.code != 200
       msg = ["caused by JsonWebTokenError: invalid signature"] 
       render json: { errors: msg }, status: :unauthorized
-    elsif not response["verified"]
-      msg = ["please verify your email address"] 
-      render json: { errors: msg }, status: :unauthorized
+    else
+      # setup session variables
+      session[:user_id] = response['_id']
+      session[:email] = response['email']
+      session[:type] = response['type']
+      session[:verified] = response['verified']
     end
-
-    # setup session variables
-    session[:user_id] = response['_id']
-    session[:email] = response['email']
-    session[:type] = response['type']
-    session[:verified] = response['verified']
   end
 
   # make sure the user can do stuff only on his account
@@ -166,9 +163,7 @@ class ResumesController < ApplicationController
     resume = Resume.find_by_id(id)
     if resume.nil?
       render json: {}, status: :not_found
-    end
-
-    unless session[:user_id] == resume.user_id
+    elsif session[:user_id] != resume.user_id
       msg = ["access to other users data is not allowed"] 
       render json: { errors: msg }, status: :unauthorized
     end
