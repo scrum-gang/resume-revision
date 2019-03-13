@@ -8,8 +8,8 @@ class ResumesControllerAuthTest < ActionDispatch::IntegrationTest
     @path = '/users/self'
     @dummy_token = "dummy_token"
     @headers = {
-        "Content-type": "application/json",
-        "Authorization": "Bearer #{@dummy_token}"
+      "Content-type": "application/json",
+      "Authorization": "Bearer #{@dummy_token}"
     }
     @expected_body = {
       "code": "InvalidCredentials",
@@ -20,7 +20,7 @@ class ResumesControllerAuthTest < ActionDispatch::IntegrationTest
   test "should fail with unauthorized with an invalid token" do
     user_id = '99'
     stub_failed_auth_request(user_id)
-    
+
     get user_resumes_url(user_id: user_id), headers: @headers
     assert_response 401, @expected_body
   end
@@ -28,7 +28,7 @@ class ResumesControllerAuthTest < ActionDispatch::IntegrationTest
   test "should fail with unauthorized when trying to access a different user data" do
     user_id = '99'
     stub_failed_auth_request(user_id)
-    
+
     get user_resumes_url(user_id: '100'), headers: @headers
     assert_response 401, @expected_body
   end
@@ -37,11 +37,11 @@ class ResumesControllerAuthTest < ActionDispatch::IntegrationTest
 
   def stub_failed_auth_request(user_id)
     stub_request(:get, "#{@endpoint}#{@path}")
-    .with(headers: @headers)
-    .to_return(
-      status: 401,
-      body: @expected_body.to_json,
-      headers: {"Content-Type"=> "application/json"}
-    )
+      .with(headers: @headers)
+      .to_return(
+        status: 401,
+        body: @expected_body.to_json,
+        headers: {"Content-Type"=> "application/json"}
+      )
   end
 end
