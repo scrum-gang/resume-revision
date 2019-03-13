@@ -8,8 +8,8 @@ class ResumesControllerTest < ActionDispatch::IntegrationTest
     @path = '/users/self'
     @dummy_token = "dummy_token"
     @headers = {
-        "Content-type": "application/json",
-        "Authorization": "Bearer #{@dummy_token}"
+      "Content-type": "application/json",
+      "Authorization": "Bearer #{@dummy_token}"
     }
   end
 
@@ -83,7 +83,7 @@ class ResumesControllerTest < ActionDispatch::IntegrationTest
       revision: '33',
       resume_data: sample_resume
     }
-    
+
     stub_successful_auth_request(user_id)
 
     assert_difference 'Resume.count', 1 do
@@ -99,9 +99,9 @@ class ResumesControllerTest < ActionDispatch::IntegrationTest
     user_id = '2'
 
     params = {
-        title: 'title',
-        user_id: user_id,
-        revision: '2'
+      title: 'title',
+      user_id: user_id,
+      revision: '2'
     }
 
     stub_successful_auth_request(user_id)
@@ -115,9 +115,9 @@ class ResumesControllerTest < ActionDispatch::IntegrationTest
   test "should return not found on delete a resume that does not exists" do
     user_id = '2'
     params = {
-        title: 'not there',
-        user_id: user_id,
-        revision: '2'
+      title: 'not there',
+      user_id: user_id,
+      revision: '2'
     }
 
     stub_successful_auth_request(user_id)
@@ -131,8 +131,8 @@ class ResumesControllerTest < ActionDispatch::IntegrationTest
   # Update a resume
   test "should update a resume successfully" do
     params = {
-        title: 'new_title',
-        revision: 'new_revision'
+      title: 'new_title',
+      revision: 'new_revision'
     }
 
     resume = Resume.find_by_id(2)
@@ -150,10 +150,10 @@ class ResumesControllerTest < ActionDispatch::IntegrationTest
 
   test "should return not found on update a resume that does not exists" do
     params = {
-        title: 'new_title',
-        revision: 'new_revision'
+      title: 'new_title',
+      revision: 'new_revision'
     }
-    
+
     stub_successful_auth_request('1')
 
     assert_no_difference 'Resume.count' do
@@ -166,10 +166,10 @@ class ResumesControllerTest < ActionDispatch::IntegrationTest
 
   def stub_successful_auth_request(user_id)
     expected_body = {
-       _id: user_id,
-       email: 'dummy@dummy.ca',
-       type: 'dummy_type',
-       verified: true
+      _id: user_id,
+      email: 'dummy@dummy.ca',
+      type: 'dummy_type',
+      verified: true
     }
 
     stub_request(:get, "#{@endpoint}#{@path}")

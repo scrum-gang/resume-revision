@@ -37,7 +37,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem "rspec", "~> 3.8"
   gem "rubocop", "~> 0.63.1"
+  gem "simplecov", "~> 0.16.1"
   gem "solargraph", "~> 0.31.2"
   gem "travis", "~> 1.8"
 end
