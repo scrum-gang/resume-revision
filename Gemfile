@@ -10,6 +10,7 @@ gem 'pry'
 gem 'json'
 gem 'httparty'
 gem 'webmock', '~> 3.0', '>= 3.0.1'
+gem "rack-cors", "~> 1.0"
 
 # rails controller testing for integration tests
 gem 'rails-controller-testing'
