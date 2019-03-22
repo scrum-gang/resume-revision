@@ -5,7 +5,7 @@ class ResumesController < ApplicationController
   before_action :authorize_based_on_resume_id, only: [:update_specific_resume]
 
   def index
-    render plain: "Everyone can see me!"
+    render plain: "RESUME REVISION RULES AUTHBOIS SUCK! 🖕🖕"
   end
 
   # Creates a new resume
@@ -135,11 +135,10 @@ class ResumesController < ApplicationController
 
   def authenticate
     response = AuthenticationTokenVerifier.verify_request(bearer_token)
-    Rails.logger.info("verification came back with response using this token #{bearer_token}")
     Rails.logger.info(response)
 
     if response.code != 200
-      msg = ["caused by JsonWebTokenError: invalid signature"]
+      msg = ["Caused by JsonWebTokenError: Invalid signature"]
       render json: { errors: msg }, status: :unauthorized
     else
       # setup session variables
@@ -153,9 +152,7 @@ class ResumesController < ApplicationController
   # make sure the user can do stuff only on his account
   def authorize
     unless session[:user_id] == params[:user_id]
-      msg = ["access to other users data is not allowed!"]
-      Rails.logger.info(session[:user_id])
-      Rails.logger.info(params[:user_id])
+      msg = ["Access to other users data is not allowed!"]
       render json: { errors: msg }, status: :unauthorized
     end
   end
@@ -166,9 +163,7 @@ class ResumesController < ApplicationController
     if resume.nil?
       render json: {}, status: :not_found
     elsif session[:user_id] != resume.user_id
-      msg = ["access to other users data is not allowed"]
-      Rails.logger.info(session[:user_id])
-      Rails.logger.info(resume.user_id)
+      msg = ["Access to other users data is not allowed!"]
       render json: { errors: msg }, status: :unauthorized
     end
   end

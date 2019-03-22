@@ -13,7 +13,7 @@ class ResumesControllerAuthTest < ActionDispatch::IntegrationTest
     }
     @expected_body = {
       "code": "InvalidCredentials",
-      "message": "caused by JsonWebTokenError: invalid signature"
+      "message": "Caused by JsonWebTokenError: Invalid signature"
     }
   end
 
