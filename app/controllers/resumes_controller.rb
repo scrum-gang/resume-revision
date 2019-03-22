@@ -135,7 +135,7 @@ class ResumesController < ApplicationController
 
   def authenticate
     response = AuthenticationTokenVerifier.verify_request(bearer_token)
-    Rails.logger.info("verification came back with response ")
+    Rails.logger.info("verification came back with response using this token #{bearer_token}")
     Rails.logger.info(response)
 
     if response.code != 200

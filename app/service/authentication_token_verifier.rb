@@ -3,7 +3,7 @@ require 'httparty'
 class AuthenticationTokenVerifier
     include HTTParty
 
-    AUTHENTICATION_ENDPOINT = 'https://jobhub-authentication.herokuapp.com'
+    AUTHENTICATION_ENDPOINT = 'https://jobhub-authentication-staging.herokuapp.com'
     base_uri AUTHENTICATION_ENDPOINT
     
     class<<self
