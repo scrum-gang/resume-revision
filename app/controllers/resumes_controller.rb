@@ -1,8 +1,6 @@
 class ResumesController < ApplicationController
 
   before_action :authenticate, except: [ :index ]
-  before_action :authorize, except: [:index, :update_specific_resume]
-  before_action :authorize_based_on_resume_id, only: [:update_specific_resume]
 
   def index
     render plain: "RESUME REVISION RULES AUTHBOIS SUCK! 🖕🖕"
