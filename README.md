@@ -38,6 +38,8 @@
     * revision
     * title
     * resume_data: base64 of the pdf
+    
+### everything below is a path variable!!! not a query param
 #### get '/resumes/:user_id'
 * list all resumes for a specific user
 #### get '/resumes/:user_id/:title/:revision'
