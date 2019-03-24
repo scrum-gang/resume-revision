@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   get '/resumes/:user_id/:title/:revision', to: 'resumes#fetch_specific_resume', as: "fetch_specific_resume"
   delete '/resumes/:user_id/:title/:revision', to: 'resumes#delete_specific_resume', as: "delete_specific_resume"
   patch '/resumes/:id', to: 'resumes#update_specific_resume', as: "update_specific_resume"
+  delete '/resumes/:id', to: 'resumes#delete_specific_resume_id', as "delete_specific_resume_id"
 end

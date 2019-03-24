@@ -1,8 +1,8 @@
 class ResumesController < ApplicationController
 
   before_action :authenticate, except: [ :index ]
-  before_action :authorize, except: [:index, :update_specific_resume]
-  before_action :authorize_based_on_resume_id, only: [:update_specific_resume]
+  before_action :authorize, except: [:index, :update_specific_resume, :delete_specific_resume_id]
+  before_action :authorize_based_on_resume_id, only: [:update_specific_resume, :delete_specific_resume_id]
 
   def index
     render plain: "RESUME REVISION RULES AUTHBOIS SUCK! 🖕🖕"
@@ -83,6 +83,19 @@ class ResumesController < ApplicationController
     revision = params[:revision]
 
     resume = Resume.find_by(user_id: user_id, title: title, revision: revision)
+    if resume.nil?
+      render json: {}, status: :not_found
+    else
+      resume.destroy
+      render json: {}, status: :ok
+    end
+  end
+
+  #delete resume by id
+  def delete_specific_resume_id
+    id = params[:id]
+    resume = Resume.find_by_id(id)
+
     if resume.nil?
       render json: {}, status: :not_found
     else
