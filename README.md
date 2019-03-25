@@ -1,6 +1,6 @@
 # Resume Revision
 * Ruby version 2.6.1
-* Rails!
+* Rails
 
 ## Description
 
@@ -19,34 +19,38 @@
 ## Deployment on Heroku
 
 * Releases on master branches are automatically deployed to Heroku.
-* Pull requests are tested on Travis before being deployed to a QA Heroku instance.
+* Pull requests are tested on Travis before being deployed to a Heroku instance.
 
 ## API Documentation
-#### READ THIS FIRST
-* all requests are expected to include the following headers
+* All requests are expected to include the following headers:
 ```json
 "Content-type": "application/json"
 "Authorization": "Bearer [token]"
 ```
-* also all requests would not allow a user to access other users data.
+* All requests would not allow a user to access another user's data.
+* All parameters are to be stored in the request body as JSON.
 
-#### post '/resumes'
-* create a new resume
-* params: 
-    * user_id: foreign key
-    * user_name 
-    * revision
-    * title
-    * resume_data: base64 of the pdf
+#### POST `/resumes`
+* Create a new resume
+* Params: 
+    * `user_id`: Foreign key
+    * `user_name` 
+    * `revision`
+    * `title`
+    * `resume_data`: Base64 of the PDF
     
-### everything below is a path variable!!! not a query param
-#### get '/resumes/:user_id'
-* list all resumes for a specific user
-#### get '/resumes/:user_id/:title/:revision'
-* list a specific resume given title and revision
-#### delete '/resumes/:user_id/:title/:revision'
-* delete a specific resume
-#### patch '/resumes/:id'
-* given a resume id
-* params: :title :revision
-* update with the new title and the new revision passed
+#### GET `/resumes/:user_id`
+* List all resumes for a specific user
+
+#### PATCH `/resumes/:id`
+* Update resume with the new title and the new revision passed
+* Params:
+    * `title`
+    * `revision`
+
+
+#### GET `/resumes/:user_id/:title/:revision`
+* List a specific resume 
+
+#### DELETE `/resumes/:user_id/:title/:revision`
+* Delete a specific resume
