@@ -17,7 +17,7 @@ class ResumesControllerTest < ActionDispatch::IntegrationTest
     user_id = '99'
     stub_successful_auth_request(user_id)
     get user_resumes_url(user_id: user_id), headers: @headers
-    assert_response :not_found
+    assert_response :ok
   end
 
   test "should get return success 200 for user 1" do
