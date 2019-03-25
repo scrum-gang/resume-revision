@@ -38,7 +38,7 @@ class ResumesController < ApplicationController
     user_id = params[:user_id]
     resumes = Resume.where(user_id: user_id)
     if resumes.empty?
-      render json: {}, status: :not_found
+      render json: [], status: :ok
     else
       render json: resumes, status: :ok
     end
