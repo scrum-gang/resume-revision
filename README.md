@@ -1,4 +1,5 @@
 # Resume Revision
+[![Build Status](https://travis-ci.com/scrum-gang/resume-revision.svg?branch=master)](https://travis-ci.com/scrum-gang/resume-revision)
 * Ruby version 2.6.1
 * Rails
 
